@@ -26,14 +26,29 @@ import java.awt.event.ActionEvent;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.GridLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.CardLayout;
+import net.miginfocom.swing.MigLayout;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.Dimension;
+import javax.swing.JTable;
+import javax.swing.JTabbedPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JToolBar;
+import com.jgoodies.forms.layout.FormSpecs;
+import javax.swing.BoxLayout;
+import javax.swing.JSeparator;
+import javax.swing.JSplitPane;
+import javax.swing.JInternalFrame;
+import javax.swing.JTextPane;
+import java.awt.FlowLayout;
+import javax.swing.JTextArea;
 @SuppressWarnings("all")
 public class SpaceAluno extends JFrame {
 
-	String menuTitle = " ";
 	private JPanel contentPane;
 
 	/**
@@ -56,6 +71,7 @@ public class SpaceAluno extends JFrame {
 	 * Create the frame.
 	 */
 	public SpaceAluno() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 554, 345);
 		setLocationRelativeTo(null);
@@ -77,6 +93,11 @@ public class SpaceAluno extends JFrame {
 		menu.add(mntmLogout);
 		
 		JMenuItem menuItem = new JMenuItem("Sair");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		menu.add(menuItem);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,76 +112,140 @@ public class SpaceAluno extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
+		JPanel panel_1 = new JPanel();
+		scrollPane.setViewportView(panel_1);
+		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblDisciplina = new JLabel(" ");
+		panel_1.add(lblDisciplina, BorderLayout.NORTH);
+		lblDisciplina.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblDisciplina.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_1.add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBounds(20, 11, 415, 191);
+//		panel.add(panel_7);
+		panel_7.setLayout(null);
+		
+		JButton btnSenha = new JButton("Senha");
+		btnSenha.setBounds(10, 11, 106, 23);
+		panel_7.add(btnSenha);
+		
+		JButton btnInformao = new JButton("Informa\u00E7\u00E3o");
+		btnInformao.setBounds(10, 45, 106, 23);
+		panel_7.add(btnInformao);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBounds(10, 11, 415, 181);
+//		panel.add(panel_6);
+		GridBagLayout gbl_panel_6 = new GridBagLayout();
+		gbl_panel_6.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_panel_6.rowHeights = new int[]{0, 0};
+		gbl_panel_6.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_6.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_6.setLayout(gbl_panel_6);
+		
+		JLabel lblDisciplina_2 = new JLabel("Disciplina");
+		GridBagConstraints gbc_lblDisciplina_2 = new GridBagConstraints();
+		gbc_lblDisciplina_2.insets = new Insets(0, 0, 0, 5);
+		gbc_lblDisciplina_2.gridx = 1;
+		gbc_lblDisciplina_2.gridy = 0;
+		panel_6.add(lblDisciplina_2, gbc_lblDisciplina_2);
+		
+		JLabel lblNotas_1 = new JLabel("Notas");
+		GridBagConstraints gbc_lblNotas_1 = new GridBagConstraints();
+		gbc_lblNotas_1.gridx = 2;
+		gbc_lblNotas_1.gridy = 0;
+		panel_6.add(lblNotas_1, gbc_lblNotas_1);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(10, 11, 415, 181);
+//		panel.add(panel_5);
+		GridBagLayout gbl_panel_5 = new GridBagLayout();
+		gbl_panel_5.columnWidths = new int[]{0, 0};
+		gbl_panel_5.rowHeights = new int[]{0, 0};
+		gbl_panel_5.columnWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_5.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_5.setLayout(gbl_panel_5);
+		
+		JLabel lblDiasDaSemana = new JLabel("Dias da Semana");
+		GridBagConstraints gbc_lblDiasDaSemana = new GridBagConstraints();
+		gbc_lblDiasDaSemana.gridx = 0;
+		gbc_lblDiasDaSemana.gridy = 0;
+		panel_5.add(lblDiasDaSemana, gbc_lblDiasDaSemana);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(10, 11, 415, 181);
+//		panel.add(panel_4);
+		GridBagLayout gbl_panel_4 = new GridBagLayout();
+		gbl_panel_4.columnWidths = new int[]{0, 0, 0};
+		gbl_panel_4.rowHeights = new int[]{0, 0};
+		gbl_panel_4.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_4.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_4.setLayout(gbl_panel_4);
+		
+		JLabel lblMensagens = new JLabel("Mensagens");
+		GridBagConstraints gbc_lblMensagens = new GridBagConstraints();
+		gbc_lblMensagens.insets = new Insets(0, 0, 0, 5);
+		gbc_lblMensagens.gridx = 0;
+		gbc_lblMensagens.gridy = 0;
+		panel_4.add(lblMensagens, gbc_lblMensagens);
+		
+		JLabel lblAes_1 = new JLabel("A\u00E7\u00F5es");
+		GridBagConstraints gbc_lblAes_1 = new GridBagConstraints();
+		gbc_lblAes_1.gridx = 1;
+		gbc_lblAes_1.gridy = 0;
+		panel_4.add(lblAes_1, gbc_lblAes_1);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(10, 11, 415, 181);
+//		panel.add(panel_3);
+		GridBagLayout gbl_panel_3 = new GridBagLayout();
+		gbl_panel_3.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_3.rowHeights = new int[]{0, 0};
+		gbl_panel_3.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_3.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_3.setLayout(gbl_panel_3);
+		
+		JLabel lblDisciplina_1 = new JLabel("Disciplina");
+		GridBagConstraints gbc_lblDisciplina_1 = new GridBagConstraints();
+		gbc_lblDisciplina_1.insets = new Insets(0, 0, 0, 5);
+		gbc_lblDisciplina_1.gridx = 0;
+		gbc_lblDisciplina_1.gridy = 0;
+		panel_3.add(lblDisciplina_1, gbc_lblDisciplina_1);
+		
+		JLabel lblNotas = new JLabel("Notas");
+		GridBagConstraints gbc_lblNotas = new GridBagConstraints();
+		gbc_lblNotas.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNotas.gridx = 3;
+		gbc_lblNotas.gridy = 0;
+		panel_3.add(lblNotas, gbc_lblNotas);
+		
+		JLabel lblAes = new JLabel("A\u00E7\u00F5es");
+		GridBagConstraints gbc_lblAes = new GridBagConstraints();
+		gbc_lblAes.gridx = 12;
+		gbc_lblAes.gridy = 0;
+		panel_3.add(lblAes, gbc_lblAes);
+		
 		JPanel panel_2 = new JPanel();
 		scrollPane.setRowHeaderView(panel_2);
 		panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[]{75, 0};
-		gbl_panel_2.rowHeights = new int[]{45, 45, 45, 45, 45, 0};
+		gbl_panel_2.rowHeights = new int[]{45, 45, 45, 45, 40, 0, 0};
 		gbl_panel_2.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_2.setLayout(gbl_panel_2);
 		
-		JPanel panel_1 = new JPanel();
-		scrollPane.setViewportView(panel_1);
-		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_1.setLayout(null);
-		
-		JLabel lblDisciplina = new JLabel(menuTitle);
-		lblDisciplina.setBounds(2, 2, 443, 29);
-		panel_1.add(lblDisciplina);
-		lblDisciplina.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDisciplina.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(2, 72, 443, 162);
-		panel_1.add(panel);
-		panel.setLayout(null);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(0, 0, 443, 162);
-//		panel.add(panel_4);
-		panel_4.setLayout(null);
-		
-		JButton btnPop = new JButton("pop");
-		btnPop.setBounds(208, 59, 89, 23);
-		panel_4.add(btnPop);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(0, 5, 443, 152);
-		//panel.add(panel_3);
-		
-		JLabel lblDisciplina_1 = new JLabel("Disciplina");
-		
-		JLabel lblNotas = new JLabel("Notas");
-		
-		JLabel lblAo = new JLabel("A\u00E7\u00E3o");
-		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
-		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addComponent(lblDisciplina_1)
-					.addGap(5)
-					.addComponent(lblNotas)
-					.addGap(5)
-					.addComponent(lblAo)
-					.addContainerGap(243, Short.MAX_VALUE))
-		);
-		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblDisciplina_1)
-						.addComponent(lblNotas)
-						.addComponent(lblAo))
-					.addContainerGap(138, Short.MAX_VALUE))
-		);
-		panel_3.setLayout(gl_panel_3);
-				
-		JButton btnDisciplina = new JButton("Disciplina");
+		JButton btnDisciplina = new JButton("Disciplinas");
 		btnDisciplina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				lblDisciplina.setText("Disciplina");	
+				lblDisciplina.setText("Disciplinas");
 				panel.removeAll();
 				panel.repaint();
 				panel.add(panel_3);
@@ -189,24 +274,29 @@ public class SpaceAluno extends JFrame {
 		gbc_btnRecados.gridy = 1;
 		panel_2.add(btnRecados, gbc_btnRecados);
 		
-		JButton btnNotas = new JButton("Notas");
-		btnNotas.addActionListener(new ActionListener() {
+		JButton btnCalendario = new JButton("Calendário");
+		btnCalendario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				lblDisciplina.setText("Notas");
+				lblDisciplina.setText("Calendário");
+				panel.removeAll();
+				panel.repaint();
+				panel.add(panel_5);
 			}
 		});
-		GridBagConstraints gbc_btnNotas = new GridBagConstraints();
-		gbc_btnNotas.fill = GridBagConstraints.BOTH;
-		gbc_btnNotas.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNotas.gridx = 0;
-		gbc_btnNotas.gridy = 2;
-		panel_2.add(btnNotas, gbc_btnNotas);
+		GridBagConstraints gbc_btnCalendario = new GridBagConstraints();
+		gbc_btnCalendario.fill = GridBagConstraints.BOTH;
+		gbc_btnCalendario.insets = new Insets(0, 0, 5, 0);
+		gbc_btnCalendario.gridx = 0;
+		gbc_btnCalendario.gridy = 2;
+		panel_2.add(btnCalendario, gbc_btnCalendario);
 		
 		JButton btnHistrico = new JButton("Hist\u00F3rico");
 		btnHistrico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblDisciplina.setText("Histórico");
-				
+				panel.removeAll();
+				panel.repaint();
+				panel.add(panel_6);
 			}
 		});
 		GridBagConstraints gbc_btnHistrico = new GridBagConstraints();
@@ -220,13 +310,15 @@ public class SpaceAluno extends JFrame {
 		btnConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblDisciplina.setText("Conta");
-				panel_1.remove(panel_3);
+				panel.removeAll();
+				panel.repaint();
+				panel.add(panel_7);
 			}
 		});
 		GridBagConstraints gbc_btnConta = new GridBagConstraints();
 		gbc_btnConta.fill = GridBagConstraints.BOTH;
 		gbc_btnConta.gridx = 0;
-		gbc_btnConta.gridy = 4;
+		gbc_btnConta.gridy = 5;
 		panel_2.add(btnConta, gbc_btnConta);
 	}
 }

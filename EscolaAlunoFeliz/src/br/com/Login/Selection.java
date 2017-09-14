@@ -38,6 +38,7 @@ public class Selection extends JFrame {
 	 * Create the frame.
 	 */
 	public Selection() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 250, 320);
 		setLocationRelativeTo(null);
@@ -49,6 +50,11 @@ public class Selection extends JFrame {
 		menuBar.add(mnArquivo);
 		
 		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		mnArquivo.add(mntmSair);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,7 +73,7 @@ public class Selection extends JFrame {
 				dispose();
 			}
 		});
-		btnAluno.setBounds(56, 106, 119, 23);
+		btnAluno.setBounds(53, 123, 120, 23);
 		panel.add(btnAluno);
 		
 		JButton btnProfessor = new JButton("Professor");
@@ -78,7 +84,7 @@ public class Selection extends JFrame {
 				dispose();
 			}
 		});
-		btnProfessor.setBounds(56, 140, 119, 23);
+		btnProfessor.setBounds(53, 157, 119, 23);
 		panel.add(btnProfessor);
 		
 		JButton btnAdministrador = new JButton("Administrador");
@@ -89,12 +95,8 @@ public class Selection extends JFrame {
 				dispose();
 			}
 		});
-		btnAdministrador.setBounds(56, 171, 119, 23);
+		btnAdministrador.setBounds(53, 191, 119, 23);
 		panel.add(btnAdministrador);
-		
-		JButton btnVistante = new JButton("Vistante");
-		btnVistante.setBounds(56, 205, 119, 23);
-		panel.add(btnVistante);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));

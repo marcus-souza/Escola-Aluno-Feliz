@@ -2,20 +2,22 @@ package br.com.Login;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.border.BevelBorder;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+
+import br.com.Space.SpaceAdm;
 @SuppressWarnings("all")
 public class LoginAdm extends JFrame {
 
@@ -43,6 +45,7 @@ public class LoginAdm extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginAdm() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 250, 320);
 		setLocationRelativeTo(null);
@@ -54,6 +57,11 @@ public class LoginAdm extends JFrame {
 		menuBar.add(menu);
 		
 		JMenuItem menuItem = new JMenuItem("Sair");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		menu.add(menuItem);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -87,6 +95,15 @@ public class LoginAdm extends JFrame {
 		panel.add(label_1);
 		
 		JButton button = new JButton("Entrar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if ((textField.getText().equals("Gustavo")) && (passwordField.getText().equals("12345"))) {
+					SpaceAdm frame = new SpaceAdm();
+					frame.setVisible(true);
+					dispose();
+				}
+			}
+		});
 		button.setBounds(67, 181, 89, 23);
 		panel.add(button);
 		
