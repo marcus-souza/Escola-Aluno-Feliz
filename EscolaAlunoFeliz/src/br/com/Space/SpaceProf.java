@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
+import br.com.ClassesInternas.Professor;
 import br.com.Login.Selection;
 
 @SuppressWarnings("all")
@@ -34,7 +35,8 @@ public class SpaceProf extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SpaceProf frame = new SpaceProf();
+					Professor prof = new Professor();
+					SpaceProf frame = new SpaceProf(prof);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,8 +47,9 @@ public class SpaceProf extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param prof 
 	 */
-	public SpaceProf() {
+	public SpaceProf(Professor prof) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 554, 345);

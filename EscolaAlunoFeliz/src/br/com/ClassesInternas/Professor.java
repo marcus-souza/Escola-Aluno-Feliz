@@ -10,13 +10,16 @@ public class Professor extends Pessoa {
 	private String senha;
 	private ArrayList<Disciplina> disciplinas;
 	
-	Professor(String nome, String cpf, String telefone, String endereço, Double valorHora, String codigo, String formacao, String usuario, String senha){
+	public Professor(String nome, String cpf, String telefone, String endereço, Double valorHora, String codigo, String formacao, String usuario, String senha){
 		super(nome, cpf, telefone, endereço); 
 		this.valorHora = valorHora;
 		this.codigo = codigo;
 		this.formacao = formacao;
 		this.usuario = usuario;
 		this.senha = senha;
+	}
+
+	public Professor() {
 	}
 
 	public ArrayList<Disciplina> getDisciplinas() {
@@ -63,11 +66,4 @@ public class Professor extends Pessoa {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public String getformacao() {
-		return formacao;
-	}
-	public void setformacao(String formacao) {
-		this.formacao = formacao;
-	}
-	
 }

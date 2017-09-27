@@ -8,12 +8,18 @@ public class Aluno extends Pessoa{
 	private Curso curso;
 	private ArrayList<Disciplina> disciplinas;
 	
-	public Aluno(String nome, String cpf, String telefone, String endereço, String usuario, String senha) {
+	public Aluno(String nome, String cpf, String telefone, String endereço, String usuario, String senha, Curso curso, ArrayList<Disciplina> disciplinas) {
 		super(nome, cpf, telefone, endereço);
 		this.usuario = usuario;
 		this.senha = senha;
+		this.curso = curso;
+		this.disciplinas = disciplinas;
 	}
 
+	public Aluno(String cpf){
+		super(null,cpf,null,null);
+	};
+	
 	public Curso getCurso() {
 		return curso;
 	}

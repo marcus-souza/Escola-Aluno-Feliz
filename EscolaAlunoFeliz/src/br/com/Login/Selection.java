@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 @SuppressWarnings("all")
@@ -22,6 +23,10 @@ public class Selection extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		UIManager.put("OptionPane.cancelButtonText", "Voltar");
+		UIManager.put("OptionPane.noButtonText", "Excluir");
+		UIManager.put("OptionPane.yesButtonText", "Atualizar");
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

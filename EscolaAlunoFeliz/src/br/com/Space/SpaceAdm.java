@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,22 +16,58 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
+import br.com.ClassesInternas.Aluno;
+import br.com.ClassesInternas.Professor;
+import br.com.ClassesInternas.Solicitação;
+import br.com.Conexão.BancoDeDados;
 import br.com.Login.Selection;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.Box;
+import java.awt.Component;
+import java.awt.TextArea;
+import java.awt.TextField;
+import javax.swing.JTable;
+import javax.swing.JScrollBar;
 
 @SuppressWarnings("all")
 public class SpaceAdm extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField textField_1;
+	private JTextField textField;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_10;
+	private JTextField textField_11;
+	private JTextField textField_12;
+	private JTextField textField_13;
+	private JTextField textField_14;
+	private JTable table;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		UIManager.put("OptionPane.cancelButtonText", "Voltar");
+		UIManager.put("OptionPane.noButtonText", "Excluir");
+		UIManager.put("OptionPane.yesButtonText", "Atualizar");
+				
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -104,141 +141,263 @@ public class SpaceAdm extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(10, 11, 421, 193);
 //		panel_2.add(panel_3);
-		panel_3.setLayout(null);
-		
+
 		JPanel panel_8 = new JPanel();
-		panel_8.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_8.setBounds(129, 11, 282, 171);
+		panel_8.setBounds(129, 11, 282, 182);
 //		panel_3.add(panel_8);
 		panel_8.setLayout(null);
 		
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setBounds(43, 36, 46, 14);
+		panel_8.add(lblNome);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(134, 33, 86, 20);
+		panel_8.add(textField_1);
+		
 		JLabel lblAluno = new JLabel("Aluno");
-		lblAluno.setBounds(10, 11, 60, 14);
+		lblAluno.setBounds(107, 8, 46, 14);
 		panel_8.add(lblAluno);
 		
+		JLabel lblCpf = new JLabel("CPF");
+		lblCpf.setBounds(43, 61, 46, 14);
+		panel_8.add(lblCpf);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(134, 58, 86, 20);
+		panel_8.add(textField);
+		
+		JLabel lblTelefone = new JLabel("Telefone");
+		lblTelefone.setBounds(43, 86, 68, 14);
+		panel_8.add(lblTelefone);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(134, 83, 86, 20);
+		panel_8.add(textField_2);
+		
+		JLabel lblEndereo = new JLabel("Endere\u00E7o");
+		lblEndereo.setBounds(43, 111, 68, 14);
+		panel_8.add(lblEndereo);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(134, 108, 86, 20);
+		panel_8.add(textField_3);
+		
+		JButton btn1k = new JButton("Ok");
+		btn1k.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Aluno a = new Aluno(
+						textField_1.getText(),
+						textField.getText(),
+						textField_2.getText(),
+						textField_3.getText(),
+						textField_1.getText(),
+						textField_1.getText(),
+						BancoDeDados.getCurso(textField_13.getText()),
+						null
+						);
+				if(BancoDeDados.existeAluno(a.getCpf())==1){
+					int op = JOptionPane.showConfirmDialog(null, "O CPF já está cadastrado. O que deseja fazer?");
+					if (op == 0){
+						BancoDeDados.atualizar(a);
+					}
+					else if(op==1){
+						JOptionPane.showConfirmDialog(null, BancoDeDados.excluir(a),"Resultado da exclusão",2);
+					}
+				}
+				else
+					JOptionPane.showConfirmDialog(null, BancoDeDados.inserir(a),"Resultado da inserção",2);
+			}
+		});
+		btn1k.setBounds(229, 148, 53, 23);
+		panel_8.add(btn1k);
+		
+		textField_13 = new JTextField();
+		textField_13.setColumns(10);
+		textField_13.setBounds(134, 133, 86, 20);
+		panel_8.add(textField_13);
+		
+		JLabel lblCurso = new JLabel("Curso");
+		lblCurso.setBounds(43, 136, 68, 14);
+		panel_8.add(lblCurso);
+		
 		JPanel panel_9 = new JPanel();
-		panel_9.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_9.setBounds(129, 11, 282, 171);
+		panel_9.setLayout(null);
+		panel_9.setBounds(129, 0, 282, 193);
 //		panel_3.add(panel_9);
 		
+		JLabel label_1 = new JLabel("Nome");
+		label_1.setBounds(42, 25, 46, 14);
+		panel_9.add(label_1);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(133, 22, 86, 20);
+		panel_9.add(textField_6);
+		
 		JLabel lblProfessor = new JLabel("Professor");
-		lblProfessor.setBounds(10, 11, 60, 14);
+		lblProfessor.setBounds(92, 0, 86, 20);
 		panel_9.add(lblProfessor);
 		
-		JPanel panel_10 = new JPanel();
-		panel_10.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_10.setBounds(129, 11, 282, 171);
-//		panel_3.add(panel_10);
+		JLabel label_3 = new JLabel("CPF");
+		label_3.setBounds(42, 50, 46, 14);
+		panel_9.add(label_3);
 		
-		JLabel lblServidor = new JLabel("Servidor");
-		lblServidor.setBounds(10, 11, 60, 14);
-		panel_10.add(lblServidor);
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(133, 47, 86, 20);
+		panel_9.add(textField_7);
+		
+		JLabel label_4 = new JLabel("Telefone");
+		label_4.setBounds(42, 75, 68, 14);
+		panel_9.add(label_4);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(133, 72, 86, 20);
+		panel_9.add(textField_8);
+		
+		JLabel label_5 = new JLabel("Endere\u00E7o");
+		label_5.setBounds(42, 100, 68, 14);
+		panel_9.add(label_5);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(133, 97, 86, 20);
+		panel_9.add(textField_9);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(133, 122, 86, 20);
+		panel_9.add(textField_10);
+		
+		JLabel lblValorHora = new JLabel("Valor Hora");
+		lblValorHora.setBounds(42, 125, 68, 14);
+		panel_9.add(lblValorHora);
+		
+		JLabel lblCdigo = new JLabel("C\u00F3digo");
+		lblCdigo.setBounds(42, 150, 68, 14);
+		panel_9.add(lblCdigo);
+		
+		textField_11 = new JTextField();
+		textField_11.setColumns(10);
+		textField_11.setBounds(133, 147, 86, 20);
+		panel_9.add(textField_11);
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBounds(133, 172, 86, 20);
+		panel_9.add(textField_12);
+		
+		JLabel lblFormao = new JLabel("Forma\u00E7\u00E3o");
+		lblFormao.setBounds(42, 175, 68, 14);
+		panel_9.add(lblFormao);
+		
+		JButton btnOk = new JButton("Ok");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Professor p = new Professor(
+						textField_6.getText(),
+						textField_7.getText(),
+						textField_8.getText(),
+						textField_9.getText(),
+						Double.parseDouble(textField_10.getText()),
+						textField_11.getText(),
+						textField_12.getText(),
+						textField_6.getText(),
+						textField_6.getText()
+						);
+				if(BancoDeDados.existeProfessor(p.getCodigo())==1){
+					int op = JOptionPane.showConfirmDialog(null, "O CPF já está cadastrado. O que deseja fazer?");
+					if (op == 0){
+						BancoDeDados.atualizar(p);
+					}
+					else if(op==1){
+						JOptionPane.showConfirmDialog(null, BancoDeDados.excluir(p),"Resultado da exclusão",2);
+					}
+				}
+				else
+					JOptionPane.showConfirmDialog(null, BancoDeDados.inserir(p),"Resultado da inserção",2);
+			}
+		});
+		btnOk.setBounds(229, 166, 53, 23);
+		panel_9.add(btnOk);
 		
 		JButton btnAluno = new JButton("Aluno");
+		btnAluno.setBounds(10, 11, 100, 23);
 		btnAluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_3.remove(panel_9);
-				panel_3.remove(panel_10);
 				panel_3.repaint();
 				panel_3.add(panel_8);
 			}
 		});
-		btnAluno.setBounds(10, 11, 100, 23);
+		panel_3.setLayout(null);
 		panel_3.add(btnAluno);
 		
 		JButton btnProfessor = new JButton("Professor");
+		btnProfessor.setBounds(10, 45, 100, 23);
 		btnProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_3.remove(panel_8);
-				panel_3.remove(panel_10);
 				panel_3.repaint();
 				panel_3.add(panel_9);
 			}
 		});
-		btnProfessor.setBounds(10, 45, 100, 23);
 		panel_3.add(btnProfessor);
 		
-		JButton btnServidor = new JButton("Servidor");
-		btnServidor.addActionListener(new ActionListener() {
+		JPanel panel_6 = new JPanel();
+		panel_6.setBounds(0, 0, 443, 216);
+panel_2.add(panel_6);
+		panel_6.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 10, 314, 195);
+		panel_6.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setColumnHeaderView(table);
+		
+		JButton btnApagarUmaSolicitao = new JButton("Apagar \r\nsolicita\u00E7\u00E3o");
+		btnApagarUmaSolicitao.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnApagarUmaSolicitao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel_3.remove(panel_9);
-				panel_3.remove(panel_8);
-				panel_3.repaint();
-				panel_3.add(panel_10);
 			}
 		});
-		btnServidor.setBounds(10, 79, 100, 23);
-		panel_3.add(btnServidor);
+		btnApagarUmaSolicitao.setBounds(316, 179, 105, 23);
+		panel_6.add(btnApagarUmaSolicitao);
+		JLabel lblDigiteOCdigo = new JLabel("Digite o c\u00F3digo:");
+		lblDigiteOCdigo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDigiteOCdigo.setBounds(316, 11, 107, 14);
+		panel_6.add(lblDigiteOCdigo);
+		textField_14 = new JTextField();
+		textField_14.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_14.setBounds(316, 27, 107, 14);
+		panel_6.add(textField_14);
+		textField_14.setColumns(10);
+		JLabel lblNewLabel = new JLabel("O que \r\ndeseja");
+		lblNewLabel.setToolTipText("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(316, 60, 107, 23);
+		panel_6.add(lblNewLabel);
+		JButton btnNewButton = new JButton("Cadastrar aluno");
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnNewButton.setBounds(316, 111, 105, 23);
+		panel_6.add(btnNewButton);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(10, 11, 421, 193);
-//		panel_2.add(panel_4);
-		GridBagLayout gbl_panel_4 = new GridBagLayout();
-		gbl_panel_4.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_4.rowHeights = new int[]{0, 0};
-		gbl_panel_4.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_4.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel_4.setLayout(gbl_panel_4);
+		JButton btnTrancarMatrcula = new JButton("Trancar Matr\u00EDcula");
+		btnTrancarMatrcula.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		btnTrancarMatrcula.setBounds(316, 145, 105, 23);
+		panel_6.add(btnTrancarMatrcula);
 		
-		JLabel lblRecados = new JLabel("Recados");
-		GridBagConstraints gbc_lblRecados = new GridBagConstraints();
-		gbc_lblRecados.gridwidth = 2;
-		gbc_lblRecados.insets = new Insets(0, 0, 0, 5);
-		gbc_lblRecados.gridx = 0;
-		gbc_lblRecados.gridy = 0;
-		panel_4.add(lblRecados, gbc_lblRecados);
-		
-		JButton btnEscrever = new JButton("Escrever");
-		GridBagConstraints gbc_btnEscrever = new GridBagConstraints();
-		gbc_btnEscrever.gridx = 12;
-		gbc_btnEscrever.gridy = 0;
-		panel_4.add(btnEscrever, gbc_btnEscrever);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(10, 11, 427, 193);
-//		panel_2.add(panel_5);
-		GridBagLayout gbl_panel_5 = new GridBagLayout();
-		gbl_panel_5.columnWidths = new int[]{0, 0, 0};
-		gbl_panel_5.rowHeights = new int[]{0, 0};
-		gbl_panel_5.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_5.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel_5.setLayout(gbl_panel_5);
-		
-		JLabel lblTurma_1 = new JLabel("Turma");
-		GridBagConstraints gbc_lblTurma_1 = new GridBagConstraints();
-		gbc_lblTurma_1.insets = new Insets(0, 0, 0, 5);
-		gbc_lblTurma_1.gridx = 0;
-		gbc_lblTurma_1.gridy = 0;
-		panel_5.add(lblTurma_1, gbc_lblTurma_1);
-		
-		JLabel lblAo = new JLabel("A\u00E7\u00E3o");
-		GridBagConstraints gbc_lblAo = new GridBagConstraints();
-		gbc_lblAo.gridx = 1;
-		gbc_lblAo.gridy = 0;
-		panel_5.add(lblAo, gbc_lblAo);
-		
-		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(10, 11, 421, 193);
-//		panel_2.add(panel_6);
-		GridBagLayout gbl_panel_6 = new GridBagLayout();
-		gbl_panel_6.columnWidths = new int[]{0, 0, 0};
-		gbl_panel_6.rowHeights = new int[]{0, 0};
-		gbl_panel_6.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_6.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel_6.setLayout(gbl_panel_6);
-		
-		JLabel lblPedidos = new JLabel("Pedidos");
-		GridBagConstraints gbc_lblPedidos = new GridBagConstraints();
-		gbc_lblPedidos.insets = new Insets(0, 0, 0, 5);
-		gbc_lblPedidos.gridx = 0;
-		gbc_lblPedidos.gridy = 0;
-		panel_6.add(lblPedidos, gbc_lblPedidos);
-		
-		JLabel lblAo_1 = new JLabel("A\u00E7\u00E3o");
-		GridBagConstraints gbc_lblAo_1 = new GridBagConstraints();
-		gbc_lblAo_1.gridx = 1;
-		gbc_lblAo_1.gridy = 0;
-		panel_6.add(lblAo_1, gbc_lblAo_1);
+		JLabel lblFazer = new JLabel(" fazer?");
+		lblFazer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFazer.setBounds(316, 72, 107, 28);
+		panel_6.add(lblFazer);
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.setBounds(10, 11, 427, 193);
@@ -279,54 +438,6 @@ public class SpaceAdm extends JFrame {
 		gbc_btnCadastrar.gridy = 0;
 		panel.add(btnCadastrar, gbc_btnCadastrar);
 		
-		JButton btnRecados = new JButton("Recados");
-		btnRecados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				label.setText("Recados");
-				panel_2.removeAll();
-				panel_2.repaint();
-				panel_2.add(panel_4);
-			}
-		});
-		GridBagConstraints gbc_btnRecados = new GridBagConstraints();
-		gbc_btnRecados.fill = GridBagConstraints.BOTH;
-		gbc_btnRecados.insets = new Insets(0, 0, 5, 0);
-		gbc_btnRecados.gridx = 0;
-		gbc_btnRecados.gridy = 1;
-		panel.add(btnRecados, gbc_btnRecados);
-		
-		JButton btnTurmas = new JButton("Turmas");
-		btnTurmas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				label.setText("Turmas");
-				panel_2.removeAll();
-				panel_2.repaint();
-				panel_2.add(panel_5);
-			}
-		});
-		GridBagConstraints gbc_btnTurmas = new GridBagConstraints();
-		gbc_btnTurmas.fill = GridBagConstraints.BOTH;
-		gbc_btnTurmas.insets = new Insets(0, 0, 5, 0);
-		gbc_btnTurmas.gridx = 0;
-		gbc_btnTurmas.gridy = 2;
-		panel.add(btnTurmas, gbc_btnTurmas);
-		
-		JButton btnSolicitaes = new JButton("Solicita\u00E7\u00F5es");
-		btnSolicitaes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				label.setText("Solicitação");
-				panel_2.removeAll();
-				panel_2.repaint();
-				panel_2.add(panel_6);
-			}
-		});
-		GridBagConstraints gbc_btnSolicitaes = new GridBagConstraints();
-		gbc_btnSolicitaes.fill = GridBagConstraints.BOTH;
-		gbc_btnSolicitaes.insets = new Insets(0, 0, 5, 0);
-		gbc_btnSolicitaes.gridx = 0;
-		gbc_btnSolicitaes.gridy = 3;
-		panel.add(btnSolicitaes, gbc_btnSolicitaes);
-		
 		JButton btnConta = new JButton("Conta");
 		btnConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -336,6 +447,59 @@ public class SpaceAdm extends JFrame {
 				panel_2.add(panel_7);
 			}
 		});
+		
+		JButton btnSolicitaes = new JButton("Solicita\u00E7\u00F5es");
+		btnSolicitaes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				label.setText("Solicitações");
+				panel_2.removeAll();
+				panel_2.repaint();
+				panel_2.add(panel_6);
+				
+				DefaultTableModel modelo = new DefaultTableModel();
+				table = new JTable(modelo);
+				scrollPane.setViewportView(table);
+				
+				//TODO retirar a parte de teste e descomentar esta parte
+//				ArrayList<Solicitação> lista = BancoDeDados.getSolicitações();
+//				modelo.addColumn("Código");
+//				modelo.addColumn("Tipo");
+//				modelo.addColumn("Data");
+//				modelo.addColumn("CPF Aluno");
+//				modelo.addColumn("código Disciplina");
+//				for(Solicitação s:lista){
+//					modelo.addRow(new Object[]{s.getCodigo(),s.getTipo(),s.getData(),s.getAluno().getCpf(),s.getDisciplina().getCodigo()});
+//				}
+					///teste
+					modelo.addColumn("Código");
+					modelo.addColumn("Tipo");
+					modelo.addColumn("Data");
+					modelo.addColumn("CPF Aluno");
+					modelo.addColumn("código Disciplina");
+					for(int i = 0; i<20; i++){
+						modelo.addRow(new Object[]{"1234","cadastramento","01 de 02 de 2018","1221","1111"});
+						modelo.addRow(new Object[]{"2333","trancamento","01 de 02 de 2018","4444","2222"});
+					}
+			}
+		});
+		
+		JButton button = new JButton("Disciplinas");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.fill = GridBagConstraints.BOTH;
+		gbc_button.insets = new Insets(0, 0, 5, 0);
+		gbc_button.gridx = 0;
+		gbc_button.gridy = 1;
+		panel.add(button, gbc_button);
+		GridBagConstraints gbc_btnSolicitaes = new GridBagConstraints();
+		gbc_btnSolicitaes.fill = GridBagConstraints.BOTH;
+		gbc_btnSolicitaes.insets = new Insets(0, 0, 5, 0);
+		gbc_btnSolicitaes.gridx = 0;
+		gbc_btnSolicitaes.gridy = 2;
+		panel.add(btnSolicitaes, gbc_btnSolicitaes);
 		GridBagConstraints gbc_btnConta = new GridBagConstraints();
 		gbc_btnConta.anchor = GridBagConstraints.SOUTH;
 		gbc_btnConta.fill = GridBagConstraints.HORIZONTAL;
@@ -345,5 +509,4 @@ public class SpaceAdm extends JFrame {
 		
 		
 	}
-
 }

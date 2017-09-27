@@ -8,12 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
 
+import br.com.ClassesInternas.Aluno;
+import br.com.Conexão.BancoDeDados;
 import br.com.Space.SpaceAluno;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -83,11 +86,14 @@ public class LoginAluno extends JFrame {
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if ((textField.getText().equals("Gustavo")) && (passwordField.getText().equals("12345"))) {
-					SpaceAluno frame = new SpaceAluno();
+				Aluno aluno = BancoDeDados.getAluno(textField.getText(),passwordField.getText());
+				if( aluno != null ){
+					SpaceAluno frame = new SpaceAluno(aluno);
 					frame.setVisible(true);
 					dispose();
 				}
+				else
+					JOptionPane.showConfirmDialog(null, "Usuário ou Senha incorretos!", "Não foi possível fazer login", 2);
 			}
 		});
 		btnEntrar.setBounds(67, 181, 89, 23);

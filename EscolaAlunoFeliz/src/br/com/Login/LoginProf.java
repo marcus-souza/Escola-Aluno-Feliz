@@ -17,6 +17,9 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
+import br.com.ClassesInternas.Aluno;
+import br.com.ClassesInternas.Professor;
+import br.com.Conexão.BancoDeDados;
 import br.com.Space.SpaceProf;
 @SuppressWarnings("all")
 public class LoginProf extends JFrame {
@@ -97,8 +100,9 @@ public class LoginProf extends JFrame {
 		JButton button = new JButton("Entrar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if ((textField.getText().equals("Gustavo")) && (passwordField.getText().equals("12345"))) {
-					SpaceProf frame = new SpaceProf();
+				Professor prof = BancoDeDados.getProfessor(textField.getText(),passwordField.getText());
+				if( prof != null ){
+					SpaceProf frame = new SpaceProf(prof);
 					frame.setVisible(true);
 					dispose();
 				}

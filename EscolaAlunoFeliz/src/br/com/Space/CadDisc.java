@@ -6,12 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import br.com.ClassesInternas.Aluno;
+import br.com.ClassesInternas.Curso;
+import br.com.ClassesInternas.Disciplina;
+import br.com.ClassesInternas.Solicitação;
+import br.com.Conexão.BancoDeDados;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -21,10 +30,13 @@ import java.awt.Window.Type;
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 @SuppressWarnings("all")
 public class CadDisc extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
+	private JTextField textField;
 	/**
 	 * Launch the application.
 	 */
@@ -32,7 +44,7 @@ public class CadDisc extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadDisc frame = new CadDisc();
+					CadDisc frame = new CadDisc(new Aluno("NomeAluno", "cpf", "telefone", "Endereço", "usuario", "senha", new Curso("NomeCurso",8), null));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +56,7 @@ public class CadDisc extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadDisc() {
+	public CadDisc(Aluno aluno) {
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -53,126 +65,96 @@ public class CadDisc extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(0, 54, 434, 207);
-		contentPane.add(panel);
-		panel.setLayout(null);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 11, 414, 185);
-//		panel.add(panel_2);
-		panel_2.setLayout(null);
-		
-		JLabel lblClculo = new JLabel("C\u00E1lculo 1");
-		lblClculo.setBounds(10, 11, 210, 14);
-		panel_2.add(lblClculo);
-		
-		JLabel lblLgica = new JLabel("L\u00F3gica");
-		lblLgica.setBounds(10, 36, 210, 14);
-		panel_2.add(lblLgica);
-		
-		JLabel lblAlgoritmo = new JLabel("Algoritmo");
-		lblAlgoritmo.setBounds(10, 61, 210, 14);
-		panel_2.add(lblAlgoritmo);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(10, 11, 414, 185);
-//		panel.add(panel_3);
-		panel_3.setLayout(null);
-		
-		JLabel lblClculo2 = new JLabel("C\u00E1lculo 2");
-		lblClculo2.setBounds(10, 11, 210, 14);
-		panel_3.add(lblClculo2);
-		
-		JLabel lblClculoNumrico = new JLabel("Cáclculo Numérico");
-		lblClculoNumrico.setBounds(10, 36, 210, 14);
-		panel_3.add(lblClculoNumrico);
-		
-		JLabel lblProgComp1 = new JLabel("Programação de Computadores I");
-		lblProgComp1.setBounds(10, 61, 210, 14);
-		panel_3.add(lblProgComp1);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(10, 11, 414, 185);
-//		panel.add(panel_4);
-		panel_4.setLayout(null);
-		
-		JLabel lblClculo3 = new JLabel("Cálculo 3");
-		lblClculo3.setBounds(10, 11, 210, 14);
-		panel_4.add(lblClculo3);
-		
-		JLabel lblFsica3 = new JLabel("Física 3");
-		lblFsica3.setBounds(10, 36, 210, 14);
-		panel_4.add(lblFsica3);
-		
-		JLabel lblProgComp2 = new JLabel("Programação de Computadores II");
-		lblProgComp2.setBounds(10, 61, 210, 14);
-		panel_4.add(lblProgComp2);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(10, 11, 414, 185);
-//		panel.add(panel_5);
-		panel_5.setLayout(null);
-		
-		JLabel lblPrdgmComp = new JLabel("Paradigma da Computação");
-		lblPrdgmComp.setBounds(10, 11, 210, 14);
-		panel_5.add(lblPrdgmComp);
-		
-		JLabel lblIHC = new JLabel("Interação Humano-Computador");
-		lblIHC.setBounds(10, 36, 210, 14);
-		panel_5.add(lblIHC);
-		
-		JLabel lblProgComp3 = new JLabel("Programação de Computadores III");
-		lblProgComp3.setBounds(10, 61, 210, 14);
-		panel_5.add(lblProgComp3);
-
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.setBounds(0, 0, 434, 43);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
-		JLabel lblDisciplina = new JLabel("Disciplina");
+		JLabel lblDisciplina = new JLabel("Disciplinas");
 		lblDisciplina.setFont(new Font("Traditional Arabic", Font.PLAIN, 16));
 		lblDisciplina.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDisciplina.setBounds(10, 11, 91, 25);
 		panel_1.add(lblDisciplina);
 		
-		String[] sem = {" ","1º Sem","2º Sem","3º Sem","4º Sem"};
+		JLabel lblFiltro = new JLabel("Filtro");
+		lblFiltro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFiltro.setBounds(301, 16, 46, 14);
+		panel_1.add(lblFiltro);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 54, 414, 169);
+		contentPane.add(scrollPane);
+		
+		DefaultTableModel modelo = new DefaultTableModel();
+		table = new JTable(modelo);
+		scrollPane.setColumnHeaderView(table);
+		
+		String[] sem = new String[1+aluno.getCurso().getQtdSemestres()];
+		sem[0] = "";
+		for(int i = 1; i<=aluno.getCurso().getQtdSemestres(); i++){
+			sem[i] = "" + (i) +"º Semestre";
+		}
 		JComboBox comboBox = new JComboBox(sem);
 		comboBox.setSelectedIndex(0);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBox.getSelectedItem().equals("1º Sem")){
-					panel.removeAll();
-					panel.repaint();
-					panel.add(panel_2);
-				}
-				if(comboBox.getSelectedItem().equals("2º Sem")){
-					panel.removeAll();
-					panel.repaint();
-					panel.add(panel_3);
-				}
-				if(comboBox.getSelectedItem().equals("3º Sem")){
-					panel.removeAll();
-					panel.repaint();
-					panel.add(panel_4);
-				}
-				if(comboBox.getSelectedItem().equals("4º Sem")){
-					panel.removeAll();
-					panel.repaint();
-					panel.add(panel_5);
+				for(int i = 1; i<=aluno.getCurso().getQtdSemestres(); i++){
+					if(comboBox.getSelectedItem().equals(sem[i])){
+						DefaultTableModel modelo = new DefaultTableModel();
+						table = new JTable(modelo);
+						scrollPane.setViewportView(table);
+						
+						//TODO retirar a parte de teste e descomentar esta parte
+//						ArrayList<Disciplina> lista = BancoDeDados.getDisciplinas(aluno.getCurso().getNome(),i);
+//						modelo.addColumn("Código");
+//						modelo.addColumn("Nome");
+//						modelo.addColumn("Professor");
+//						for(Disciplina d:lista){
+//							modelo.addRow(new Object[]{d.getCodigo(),d.getNome(),d.getProfessor()});
+//						}
+							///teste
+							modelo.addColumn("Código");
+							modelo.addColumn("Nome");
+							modelo.addColumn("Professor");
+							for(int j = 0; j<20; j++){
+								modelo.addRow(new Object[]{"1234"+i,"Bando De Dados" +i,"José"});
+								modelo.addRow(new Object[]{"2333"+i,"Programas" +i,"Paulo"});
+							}
+					}
 				}
 			}
 		});
 		comboBox.setBounds(357, 13, 67, 20);
 		panel_1.add(comboBox);
 		
-		JLabel lblFiltro = new JLabel("Filtro");
-		lblFiltro.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFiltro.setBounds(301, 16, 46, 14);
-		panel_1.add(lblFiltro);
+		JLabel lblDigiteOCdigo = new JLabel("Digite o c\u00F3digo da disciplina em que deseja se cadastrar:");
+		lblDigiteOCdigo.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblDigiteOCdigo.setBounds(10, 234, 286, 14);
+		contentPane.add(lblDigiteOCdigo);
+		
+		textField = new JTextField();
+		textField.setBounds(290, 234, 72, 14);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("OK");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Disciplina d = BancoDeDados.getDisciplina(textField.getText());
+				if(d!=null){
+					JOptionPane.showConfirmDialog(null,
+							BancoDeDados.inserir(new Solicitação(null,"Cadastro",null,aluno,d)),
+							null,2);
+				}
+				else
+					JOptionPane.showConfirmDialog(null, "Código incorreto!",null,2);
+			}
+		});
+		btnNewButton.setBounds(372, 230, 52, 23);
+		contentPane.add(btnNewButton);
+		
+		
 	}
 }

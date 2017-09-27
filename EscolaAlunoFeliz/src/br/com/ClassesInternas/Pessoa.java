@@ -13,6 +13,9 @@ public class Pessoa {
 		this.telefone = telefone;
 		this.endereço = endereço;
 	}
+	
+	public Pessoa(){};
+	
 	public String getNome() {
 		return nome;
 	}

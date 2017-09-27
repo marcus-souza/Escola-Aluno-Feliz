@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
+import br.com.ClassesInternas.Aluno;
+import br.com.Conexão.BancoDeDados;
 import br.com.Space.SpaceAdm;
 @SuppressWarnings("all")
 public class LoginAdm extends JFrame {
@@ -97,7 +99,7 @@ public class LoginAdm extends JFrame {
 		JButton button = new JButton("Entrar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if ((textField.getText().equals("Gustavo")) && (passwordField.getText().equals("12345"))) {
+				if (BancoDeDados.entrarComoAdm(textField.getText(),passwordField.getText())) {
 					SpaceAdm frame = new SpaceAdm();
 					frame.setVisible(true);
 					dispose();
