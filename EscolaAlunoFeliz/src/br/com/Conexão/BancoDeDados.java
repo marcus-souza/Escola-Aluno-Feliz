@@ -318,16 +318,21 @@ public class BancoDeDados {
 		}
 	}
 
-	public static Curso getCurso(String nomeCurso) {
-		// TODO Fazer método
-		return null;
-	}
-
 	public static Aluno getAluno(String user, String senha) {
 		// TODO fazer o metodo
 		return null;
 	}
 
+	public static Curso getCurso(String nomeCurso) {
+		// TODO Fazer método
+		return null;
+	}
+	
+	public static ArrayList<Curso> getCursos() {
+		// TODO fazer o método
+		return null;
+	}
+	
 	public static ArrayList<Recado> getRecados(Aluno aluno) {
 		// TODO fazer o método
 		return null;
@@ -347,10 +352,10 @@ public class BancoDeDados {
 		// TODO criar método
 		return null;
 	}
-	
 
 	public static boolean entrarComoAdm(String user, String senha) {
 		// TODO fazer o método
 		return false;
 	}
+
 }

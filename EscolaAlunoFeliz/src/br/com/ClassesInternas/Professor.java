@@ -18,9 +18,13 @@ public class Professor extends Pessoa {
 		this.usuario = usuario;
 		this.senha = senha;
 	}
-
-	public Professor() {
+	
+	public Professor(String nome, String cpf, String telefone, String endereço, String codigo) {
+		super(nome, cpf, telefone, endereço);
+		this.codigo = codigo;
 	}
+
+
 
 	public ArrayList<Disciplina> getDisciplinas() {
 		return disciplinas;

@@ -110,8 +110,7 @@ public class CadDisc extends JFrame {
 //						ArrayList<Disciplina> lista = BancoDeDados.getDisciplinas(aluno.getCurso().getNome(),i);
 //						modelo.addColumn("Código");
 //						modelo.addColumn("Nome");
-//						modelo.addColumn("Professor");
-//						for(Disciplina d:lista){
+//						modelo.addColumn("Professor");						for(Disciplina d:lista){
 //							modelo.addRow(new Object[]{d.getCodigo(),d.getNome(),d.getProfessor()});
 //						}
 							///teste
